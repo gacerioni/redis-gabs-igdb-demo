@@ -1,0 +1,48 @@
+version: '3.9'
+services:
+  db:
+    image: postgres:14.11
+    environment:
+      POSTGRES_PASSWORD: secret42
+    ports:
+      - "5432:5432"
+
+  dataloader:
+    image: gacerioni/igdb-loader-to-postgresql:1.0.0
+    restart: "no"
+    environment:
+      GABS_DATABASE_URL: postgresql://postgres:secret42@db:5432/postgres
+    depends_on:
+      - db
+    command: >
+      sh -c "
+        dockerize -wait tcp://db:5432 -timeout 60s &&
+        python loader_to_postgres_games.py
+      "
+
+  redis-stack:
+    image: redis/redis-stack:latest
+    environment:
+      REDIS_ARGS: "--requirepass secret42"
+    depends_on:
+      - db
+      - dataloader
+    ports:
+      - "6379:6379" # Redis server port
+      - "8002:8001" # RedisInsight port
+    volumes:
+      - redis_data:/data # Optional: persist Redis data
+
+  app: # Assuming this is the new service you want to add
+    image: gacerioni/gabs-igdb-postgresql:1.0.0
+    environment:
+      GABS_DATABASE_URL: postgresql://postgres:secret42@db:5432/postgres
+      GABS_REDIS_URL: redis://default:secret42@redis-stack:6379/0
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+      - redis-stack
+
+volumes:
+  redis_data:

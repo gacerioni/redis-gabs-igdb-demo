@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Search - IGDB with Redis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #0A192F; /* Dark navy blue */
+            color: #E0E0E0; /* Light grey for text */
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            background-image: url('https://c4.wallpaperflare.com/wallpaper/403/627/591/action-adventure-dragons-dungeons-wallpaper-preview.jpg'); /* Replace with your gaming/Redis background */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container, .about {
+            background-color: rgba(255, 255, 255, 0.9); /* Light background for contrast */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+            max-width: 500px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+
+        h1, h2 {
+            color: #2CAEBA; /* Soft teal */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        input[type="text"], button {
+            padding: 10px;
+            border: 2px solid #2CAEBA; /* Soft teal for borders */
+            border-radius: 4px;
+            background-color: #fff;
+            color: #333;
+            font-weight: 500;
+        }
+
+        button {
+            background-color: #2CAEBA; /* Soft teal for button */
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #007B8F; /* Darker teal for hover effect */
+        }
+
+        .footer {
+            text-align: center;
+            color: #E0E0E0;
+        }
+
+        .footer a, .about a {
+            color: #66c7ce; /* Bright aqua for links */
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+        .footer a:hover, .about a:hover {
+            text-decoration: underline;
+        }
+
+        .about img {
+            max-width: 100px;
+            border-radius: 50%;
+            margin: 0 auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Busque por qualquer Game por nome:</h1>
+        <form action="/search" method="post">
+            <input type="text" name="query" required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <div class="about">
+        <img src="https://play-lh.googleusercontent.com/K4svBsOsZl18tJg-TCM_b6B7i55WW2VCs4tCSrLiUKsZVOYmrUjfM34KheFJfbieNB8=w240-h480-rw" alt="Gabriel Cerioni"> <!-- Replace with your photo URL -->
+        <h2>Reach out!</h2>
+        <p><a href="https://www.linkedin.com/in/gabrielcerioni" target="_blank">LinkedIn</a> | <a href="mailto:gabriel.cerioni@redis.com">Email</a></p>
+    </div>
+    <div class="footer">
+        Powered by <a href="https://redis.io" target="_blank">Redis</a> and <a href="https://www.igdb.com" target="_blank">IGDB</a>
+    </div>
+</body>
+</html>

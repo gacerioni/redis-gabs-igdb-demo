@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+  redis-stack:
+    image: redis/redis-stack:latest
+    environment:
+      REDIS_ARGS: "--requirepass secret42"
+    ports:
+      - "6379:6379" # Redis server port
+      - "8002:8001" # RedisInsight port
+    volumes:
+      - ../data/dump.rdb:/data/dump.rdb
+      - redis_data:/data
+  app: # Assuming this is the new service you want to add
+    image: gacerioni/gabs-igdb-books-redis-vector-demo:1.0.0
+    environment:
+      GABS_REDIS_URL: redis://default:secret42@redis-stack:6379/0
+    ports:
+      - "5000:5000"
+    depends_on:
+      - redis-stack
+volumes:
+  redis_data:
