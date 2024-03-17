@@ -1,0 +1,12 @@
+# Use the official Redis Stack image as a parent image
+FROM redis/redis-stack:latest
+
+# Set the working directory in the container
+WORKDIR /data
+
+# Copy the dump.rdb file into the container at /data
+# Ensure dump.rdb is within the Docker build context
+COPY data/dump.rdb /data
+
+# Instruct Redis to load the dataset on startup
+CMD ["redis-stack-server", "--dir", "/data"]

@@ -2,7 +2,16 @@ import os
 import time
 
 import redis
+from dotenv import load_dotenv
 from redis import BusyLoadingError
+
+from config.logger_config import setup_logger
+
+# Setup logger
+logger = setup_logger()
+
+# Load environment variables
+load_dotenv()
 
 r = redis.Redis.from_url(os.getenv("GABS_REDIS_URL"))
 
