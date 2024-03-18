@@ -37,7 +37,11 @@ def load_books_into_redis(datasource_dir):
         if os.path.isfile(filepath):
             with open(filepath, 'r', encoding="utf-8") as book_file:
                 book_json = json.load(book_file)
-                book_json['embedding'] = model.encode(book_json['description']).astype(np.float32).tolist()
+
+                # Append the title and author to the description before encoding
+                full_text = f"{book_json['title']} {book_json['author']} {book_json['description']}"
+
+                book_json['embedding'] = model.encode(full_text).astype(np.float32).tolist()
                 r.json().set(f"book:{book_json['id']}", "$", book_json)
                 logger.info(f"{book_json['title']} processed and loaded into Redis. ID: book:{book_json['id']}",
                             book_json)

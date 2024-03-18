@@ -11,7 +11,7 @@ services:
       - ../data/dump.rdb:/data/dump.rdb
       - redis_data:/data
   app: # Assuming this is the new service you want to add
-    image: gacerioni/gabs-igdb-books-redis-vector-demo:1.0.1
+    image: gacerioni/gabs-igdb-books-redis-vector-demo:1.0.0
     environment:
       GABS_REDIS_URL: redis://default:secret42@redis-stack:6379/0
     ports:

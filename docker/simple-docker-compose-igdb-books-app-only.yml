@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   app: # Assuming this is the new service you want to add
-    image: gacerioni/gabs-igdb-books-redis-vector-demo:2.0.0
+    image: gacerioni/gabs-igdb-books-redis-vector-demo:1.0.0
     environment:
       GABS_REDIS_URL: redis://readonly:secret42@redis-12345.gabs-cluster.redisdemo.com:12345/0
     ports:
