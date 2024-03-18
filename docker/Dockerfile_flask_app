@@ -14,6 +14,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Now, copying everything from the root since we've restructured the project
 COPY .. .
 
+RUN rm -rf /usr/src/app/.git
+
 # Make port 5000 available to the world outside this container
 EXPOSE 5000
 
